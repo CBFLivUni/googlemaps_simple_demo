@@ -2,7 +2,7 @@
 var map;
 var markers = [];
 
-
+//searches through a text array to find the index of the string
 function find_index(entries,target)
 {
 	for (let i=0; i < entries.length; i++)
@@ -13,7 +13,7 @@ function find_index(entries,target)
 }
 
 
- 
+ //takes a csv file and adds markers to the map
 function add_to_map(file_contents)
 {
  
@@ -61,42 +61,25 @@ function load(datatype) {
 	
 	const filename = './data/'+datatype+"/"+datatype+"-merseyside-street.csv"
 	fetch(filename)
-  .then((response) => response.text())
-  .then((data) => add_to_map(data));
+	.then((response) => response.text())
+	.then((data) => add_to_map(data));
 	
 	
 }
 
+//called when option changes in index.html
 function reload() {
 	var dataset = document.getElementById('Dataset')
-	console.log(dataset.value)
-	
+
 	load(dataset.value)
 }
 
 
 
-//called on page startup from index.html
+//called on page startup ('load' event)
 function initialize() {
-
-    var stylesArray = [
-        {
-          featureType: '',
-          elementType: '',
-          stylers: [
-            {color: ''},
-            {visibility: ''},
-            // Add any stylers you need.
-          ]
-        },
-        {
-          featureType: '',
-          // Add the stylers you need.
-        }
-      ]
-
-
-// initial map view, will change when all markers are loaded
+ 
+// initial map view 
     var mapOptions = {
         center: {
             lat: 53.406,
@@ -132,3 +115,4 @@ function initialize() {
 
 }
 
+window.addEventListener('load', initialize)
